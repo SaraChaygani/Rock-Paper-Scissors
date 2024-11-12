@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>App</title>
+</head>
+<body>
+  <!--12c-->
+  <button class="js-timer-button" onclick="startTimer();">Start</button>
+
+  <!--12f-->
+  <button onclick="addToCart();">Add to cart</button>
+  <p class="js-display"></p>
+  <!--12h-->
+  <button onclick="message++;">Add message</button>
+  <button onclick="
+    if(message >0 ){
+    message--;
+    }
+    if(message === 0){
+      StopNotification();
+    }  
+    ">remove message</button>
+  <script>
+
+    //12j
+    // let multiply = (number1, number2) => number1 * number2;
+    // console.log(multiply(2,6));
+
+    //12m
+    function addNumber(arr, num)
+    {
+      return arr.map(number => number + num);
+    }
+    console.log(addNumber([1,2,3],2));
+
+    //12n
+    function removeEggs(arr, value){
+       return arr.filter(element =>  element !== value);
+    }
+    const arrFood = ['egg','apple','egg','egg','ham'];
+    console.log(removeEggs(arrFood,'egg'));
+    console.log(removeEggs(['hey', 'you', 'hwllo', 'hello', 'hey', 'hey' , 'you'], 'hey'));
+
+    function removeFirstEggs(arr)
+    {
+      let countEggs = 0;
+      return arr.filter(value => {
+        if(value === 'egg' && countEggs < 2)
+        {
+          countEggs ++;
+          return false;
+        }
+        else{
+          return true;
+        }
+      });
+    }
+    console.log(removeFirstEggs(arrFood));
+    //12l
+    // function countPositive(arrNumber)
+    // {
+    //     let coundPositive =0;
+    //     arrNumber.forEach(value =>{
+    //       if(value > 0)
+    //       {
+    //         coundPositive++;
+    //       }
+    //     });
+    //     return coundPositive;
+    // }
+
+    // console.log(countPositive([1,-2,-6,-5,4]));
+    // console.log(countPositive([-2, 3, -5, 7, 10]));
+    //12h
+    let message = 2;
+    let intervalVal;
+    let isDisplayNotification;
+    DisplayNotification();
+
+    //12g
+    function DisplayNotification()
+    {
+      if(isDisplayNotification)
+      {
+        return;
+      }
+      isDisplayNotification = true;
+      intervalVal = setInterval(() => {
+        if(document.title === 'App')
+        {
+          document.title = `(${message} messages)`;
+        }
+        else{
+          document.title = 'App';
+        }
+      }, 1000);
+    }
+
+    function StopNotification()
+    {
+      isDisplayNotification = false;
+      clearInterval(intervalVal);
+      document.title = 'App';
+    }
+
+
+    //12f
+    let timeValue ;
+    function addToCart()
+    {
+      let paraElm = document.querySelector('.js-display');
+      paraElm.textContent = 'added';
+      
+      clearTimeout(timeValue);
+       timeValue = setTimeout(()=>{
+        paraElm.textContent = '';
+        },2000);
+    }
+
+    function startTimer()
+    {
+      const buttonElement = document.querySelector('.js-timer-button');
+      buttonElement.textContent = 'Loading..';
+      setTimeout(() => {
+         buttonElement.textContent = 'finished';
+      }, 1000);
+    }
+
+  </script>
+</body>
+</html>
